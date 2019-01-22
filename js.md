@@ -72,7 +72,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 
   ```js
   // bad
-  const a = new Object{}
+  const a = new Object()
 
   // good
   const a = {}
@@ -178,7 +178,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   // good
   items.push('test')
   ```
-
+<!-- 
 - 使用拓展运算符 `...` 复制数组
 
   ```js
@@ -196,6 +196,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   // good
   itemsCopy = [...items]
   ```
+-->
 
 - 使用数组的 `map` 等方法时，请使用 `return` 声明，如果是单一声明语句的情况，可省略 `return`
 
@@ -317,6 +318,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   ```
 
 - 字符串太长的时候，请不要使用字符串连接符换行 `\`，而是使用 `+`
+- 运算符多行写在行尾
 
   ```js
   const str = '凹凸实验室 凹凸实验室 凹凸实验室' +
@@ -342,6 +344,8 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 ### 函数
 
 - 请使用函数声明，而不是函数表达式
+- 箭头函数必须使用花括号
+- 函数的参数小于等于5个
 
   ```js
   // bad
@@ -353,6 +357,12 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   function foo () {
     // do something
   }
+  
+  // bad
+  [1, 2].map(item => item + 1)
+
+  // good
+  [1, 2].map((item) => { return item + 1 })
   ```
 
 - 不要在非函数代码块中声明函数
@@ -408,11 +418,12 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 ### 原型
 
 - 使用 `class`，避免直接操作 `prototype`
+- constructor 必须加`spuer()`
 
   ```js
   // bad
   function Queue (contents = []) {
-    this._queue = [..contents]
+    this._queue = [...contents]
   }
   Queue.prototype.pop = function () {
     const value = this._queue[0]
@@ -423,6 +434,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   // good
   class Queue {
     constructor (contents = []) {
+      super()
       this._queue = [...contents]
     }
 
@@ -452,7 +464,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
   export default Util
   ```
 
-- 不要使用 `import` 的通配符 `*`，这样可以确保你只有一个默认的 export
+- 不要使用 `import` 的通配符 `*`，这样可以确保你只有一个默认的 export (不考虑第三方依赖的情况)
 
   ```js
   // bad
@@ -485,7 +497,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 
 ### 对象属性
 
-- 使用 `.` 来访问对象属性
+- 使用 `.` 来访问对象属性，不包括使用变量传参
 
   ```js
   const joke = {
@@ -599,19 +611,22 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 
 ### 分号
 
-- 我们遵循 `Standard` 的规范，不使用分号。
+- 我们遵循 `Standard` 的规范，强制使用分号。
 
+  <!-- 
   > 关于应不应该使用分号的讨论有很多，本规范认为非必要的时候，应该不使用分号，好的 `JS` 程序员应该清楚场景下是一定要加分号的，相信你也是名好的开发者。
   
   > 以` [ ( / + - ` 开头的需要在前面写分号
+  -->
+  
   ```js
-  // bad
+  // good
   const test = 'good';
   (function () {
     const str = 'hahaha';
   })()
 
-  // good
+  // bad
   const test = 'good'
   ;(() => {
     const str = 'hahaha'
@@ -620,7 +635,7 @@ JavaScript 是一种客户端脚本语言，这里列出了编写 JavaScript 时
 
 ### 代码缩进
 
-2个空格 不允许出现多条空行
+2个空格 不允许出现多条空行, 空行最多不超过1行
 
 ### 标准特性
 

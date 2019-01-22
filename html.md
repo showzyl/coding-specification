@@ -1,6 +1,3 @@
-title: 代码规范
----
-
 ## DOCTYPE 声明
 
 一个DOCTYPE必须包含以下部分，并严格按照顺序出现：
@@ -211,14 +208,14 @@ HTML文本、CDATA、JavaScript、meta标签某些属性等内容可大小写混
 
 不需要为 CSS、JS 指定类型属性，HTML5 中默认已包含
 
-*推荐：*
+*不推荐：*
 
 ```html
 <link rel="stylesheet" href="" >
 <script src=""></script>
 ```
 	
-*不推荐：*
+*推荐：*
 
 ```html
 <link rel="stylesheet" type="text/css" href="" >
@@ -229,14 +226,15 @@ HTML文本、CDATA、JavaScript、meta标签某些属性等内容可大小写混
 
 * 元素属性值使用双引号语法
 * 元素属性值可以写上的都写上
+* 元素属性值自闭合 且最后带空格
 
 
 *推荐：*
 
 ```html
-<input type="text">
+<input type="text" />
 	
-<input type="radio" name="name" checked="checked" >
+<input type="radio" name="name" checked="checked" />
 ```
 	
 *不推荐：*
@@ -259,17 +257,23 @@ HTML文本、CDATA、JavaScript、meta标签某些属性等内容可大小写混
 
 
 在 HTML 中不能使用小于号 “&lt;” 和大于号 “&gt;”特殊字符，浏览器会将它们作为标签解析，若要正确显示，在 HTML 源代码中使用字符实体
+href 空属性中不要为空
 
 *推荐：*
 
 ```html
 <a href="#">more&gt;&gt;</a>
+<a href="#">more&gt;&gt;</a>
+<a href="javascript:;">more&gt;&gt;</a>
+<a >more&gt;&gt;</a>
+
 ```
 
 *不推荐：*
 
 ```html
 <a href="#">more>></a>
+<a href="">more>></a>
 ```
 更多关于符号引用：[#Character references](http://www.w3.org/TR/html5/syntax.html#character-references)
 
@@ -279,7 +283,7 @@ HTML文本、CDATA、JavaScript、meta标签某些属性等内容可大小写混
 
 ```html
 <div class="jdc">
-    <a href="#"></a>
+  <a href="#"></a>
 </div> 
 ```
 
